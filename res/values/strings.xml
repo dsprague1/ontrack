@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">onTrack</string>
+    <string name="action_settings">Settings</string>
+    <string name="item_title">Title</string>
+	<string name="duration_title">Duration</string>
+	<string name="drawer_open">open drawer</string>
+	<string name="drawer_close">closer drawer</string>
+	<string name="dev">Developer:</string>
+	<string name="devName">Davis Sprague, Sleepy Cat</string>
+	<string name="splash">Sleepy Cat Logo:</string>
+	<string name="splashName">Max Boucher</string>
+	<string name="action_check">Check</string>
+    
+	<!-- Backwards compatibility arrays -->
+	
+	<string-array name="menu_array">
+	    <item>Feed</item>
+	    <item>New Track</item>
+	    <item>Credits</item>
+	</string-array>
+	
+	<string-array name="numbers_array">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+        <item>20</item>
+        <item>25</item>
+        <item>30</item>
+        <item>35</item>
+        <item>40</item>
+        <item>45</item>
+        <item>50</item>
+        <item>55</item>
+        <item>59</item>
+    </string-array>
+	
+	<string-array name="decimal_array">
+        <item>0</item>
+        <item>25</item>
+        <item>50</item>
+        <item>75</item>
+    </string-array>
+	
+</resources>
