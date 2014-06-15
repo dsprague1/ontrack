@@ -20,13 +20,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class MainActivity extends ActionBarActivity implements NewTrackFragment.OnDataPass
+public class MainActivity extends ActionBarActivity implements NewTrackFragment.OnDataPass, AggregateFragment.OnDataPass
 {	
 	private ArrayList<Track>mAllTracks;
 	
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
+    private int mCurrentTrack;
 
     private int mCurrentFrag = 0;
     private CharSequence mDrawerTitle;
@@ -97,21 +98,35 @@ public class MainActivity extends ActionBarActivity implements NewTrackFragment.
     {
         // update the main content by replacing fragments
         Fragment fragment = null;
+        Bundle args = new Bundle();
         
         if(position == 0)
+        {
         	fragment = new AggregateFragment();
-        Bundle args = new Bundle();
-        args.putSerializable(AggregateFragment.EXTRA_TRACK, mAllTracks);
-        fragment.setArguments(args);
+            args.putSerializable(AggregateFragment.EXTRA_TRACK, mAllTracks);
+        }
+        else if(position == 1)
+        	fragment = new NewTrackFragment();
+        else if(position == 2)
+        	fragment = new CreditsFragment();
+        else if(position == -1)
+        {
+        	fragment = new CurrTrackFragment();
+        	args.putSerializable(CurrTrackFragment.EXTRA_CURRENT_TRACK, mAllTracks.get(mCurrentTrack));
+        	setTitle(mAllTracks.get(mCurrentTrack).getTitle());
+        }
 
-        mCurrentFrag = position;
+        fragment.setArguments(args);
         FragmentManager fm = getSupportFragmentManager();
-        fm.beginTransaction().replace(R.id.content_frame, mAllFrags.get(position)).commit();
+        fm.beginTransaction().replace(R.id.content_frame, fragment).commit();
         
         // update selected item and title, then close the drawer
-        mDrawerList.setItemChecked(position, true);
-        setTitle(mMenuTitles[position]);
-        mDrawerLayout.closeDrawer(mDrawerList);
+        if(position > 0)
+        {
+        	mDrawerList.setItemChecked(position, true);
+        	setTitle(mMenuTitles[position]);
+        	mDrawerLayout.closeDrawer(mDrawerList);
+        }
     }
     
     @Override
@@ -164,7 +179,7 @@ public class MainActivity extends ActionBarActivity implements NewTrackFragment.
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        // Pass any configuration change to the drawer toggls
+        // Pass any configuration change to the drawer toggles
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
     
@@ -174,5 +189,12 @@ public class MainActivity extends ActionBarActivity implements NewTrackFragment.
     {
     	mAllTracks.add(result);
     	selectItem(0);
+    }
+    
+    @Override
+    public void onDataPass(int position)
+    {
+    	mCurrentTrack = position;
+    	selectItem(-1);
     }
 }

@@ -28,6 +28,7 @@
 	        android:id="@+id/bigspinner1"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
+	        android:textColor="#FFFFFF"
 	        android:layout_weight="1" />
 	    
 	    <TextView
@@ -43,6 +44,7 @@
 	        android:id="@+id/bigspinner2"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
+	        android:textColor="#FFFFFF"
 	        android:layout_weight="1" />
 	    
 	</LinearLayout>

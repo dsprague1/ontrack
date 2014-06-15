@@ -12,13 +12,14 @@
 	<string name="splash">Sleepy Cat Logo:</string>
 	<string name="splashName">Max Boucher</string>
 	<string name="action_check">Check</string>
+	<string name="tracknameprompt">Please enter a name for your new track.</string>
     
 	<!-- Backwards compatibility arrays -->
 	
 	<string-array name="menu_array">
 	    <item>Feed</item>
 	    <item>New Track</item>
-	    <item>Credits</item>
+	    <item>About</item>
 	</string-array>
 	
 	<string-array name="numbers_array">

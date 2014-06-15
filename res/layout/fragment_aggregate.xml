@@ -12,6 +12,7 @@
         android:layout_width="150sp"
         android:layout_height="wrap_content"
         android:id="@+id/title_label"
+        android:textSize="20sp"
         android:layout_gravity="center_horizontal"
         />
     
@@ -19,6 +20,7 @@
         android:layout_width="150sp"
         android:layout_height="wrap_content"
         android:id="@+id/items_label"
+        android:textSize="20sp"
         android:layout_gravity="center_horizontal"
         />
     
@@ -26,6 +28,7 @@
         android:layout_width="150sp"
         android:layout_height="wrap_content"
         android:id="@+id/length_label"
+        android:textSize="20sp"
         android:layout_gravity="center_horizontal"
         />
 

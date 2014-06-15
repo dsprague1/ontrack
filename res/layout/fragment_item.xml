@@ -4,10 +4,11 @@
              android:layout_height="fill_parent">
 
 	<LinearLayout
-    	android:layout_width="300dp"
-    	android:id="@+id/front"
-    	android:layout_height="wrap_content"
-    	android:orientation="vertical" >
+	    android:id="@+id/front"
+	    android:layout_width="300dp"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="center_horizontal"
+	    android:orientation="vertical" >
     
     	<TextView
         	android:id="@+id/titleField"
@@ -25,10 +26,12 @@
 	</LinearLayout>
 	
 	<LinearLayout
+	    android:id="@+id/back"
 	    android:layout_width="300dp"
-    	android:id="@+id/back"
-    	android:layout_height="wrap_content"
-    	android:orientation="vertical">
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="center_horizontal"
+	    android:orientation="vertical" >
+
 	</LinearLayout>
 	
 </FrameLayout>

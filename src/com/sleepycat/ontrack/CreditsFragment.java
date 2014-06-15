@@ -54,7 +54,7 @@ public class CreditsFragment extends Fragment
 		
 		TextView sleepyTitle =(TextView)v.findViewById(R.id.maxLink1);
 		sleepyTitle.setClickable(true);
-		String sleepyText = "<a href=''www.linkedin.com/pub/max-boucher/92/800/1'> Sleepy Cat Logo:</a>";
+		String sleepyText = "<a href='http://www.linkedin.com/pub/max-boucher/92/800/1'> Sleepy Cat Logo:</a>";
 		Spannable spanned3Text = Spannable.Factory.getInstance().newSpannable(Html.fromHtml(sleepyText));
 		sleepyTitle.setMovementMethod(LinkMovementMethod.getInstance());
 		Spannable processed3Text = removeUnderlines(spanned3Text);
@@ -62,7 +62,7 @@ public class CreditsFragment extends Fragment
 		
 		TextView sleepyName =(TextView)v.findViewById(R.id.maxLink2);
 		sleepyName.setClickable(true);
-		String maxtext = "<a href='www.linkedin.com/pub/max-boucher/92/800/1'>  Max Boucher</a>";
+		String maxtext = "<a href='http://www.linkedin.com/pub/max-boucher/92/800/1'>  Max Boucher</a>";
 		Spannable spanned4Text = Spannable.Factory.getInstance().newSpannable(
 				Html.fromHtml(maxtext));
 		sleepyName.setMovementMethod(LinkMovementMethod.getInstance());

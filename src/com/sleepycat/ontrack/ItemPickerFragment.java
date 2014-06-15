@@ -1,5 +1,6 @@
 package com.sleepycat.ontrack;
 
+import net.simonvt.numberpicker.NumberPicker;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -10,13 +11,12 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -79,7 +79,7 @@ public class ItemPickerFragment extends DialogFragment
 		mHourButton = (ImageView)v.findViewById(R.id.hoursButton);
 		mMinuteButton = (ImageView)v.findViewById(R.id.minutesButton);
 		
-		NumberPicker bigPickerOne = (NumberPicker)v.findViewById(R.id.bigpicker1);
+		NumberPicker bigPickerOne  = (NumberPicker)v.findViewById(R.id.bigpicker1);
 		bigPickerOne.setMaxValue(16);
 		bigPickerOne.setMinValue(0);
 		bigPickerOne.setDisplayedValues(Rnum);
@@ -170,7 +170,6 @@ public class ItemPickerFragment extends DialogFragment
         
 		return new AlertDialog.Builder(getActivity())
 		.setView(v)
-		.setTitle("New Item")
 		.setPositiveButton(android.R.string.ok, 
 				new DialogInterface.OnClickListener() 
 				{

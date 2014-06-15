@@ -26,7 +26,7 @@ public class ItemSpinnerFragment extends DialogFragment implements OnItemSelecte
 {
 	private TextView mSmallDuration;
 	private Item mCurrentItem;
-	private int mBig1, mBig2;
+	private double mBig1 = 0, mBig2 = 0;
 	private String mTitle = "", mDur1 = "", mDur2 = "";
 	private ImageView mHourButton, mMinuteButton;
 	private boolean mHourIn = true;
@@ -37,7 +37,7 @@ public class ItemSpinnerFragment extends DialogFragment implements OnItemSelecte
 		if(getTargetFragment() == null)
 			return;
 		
-		double a = mBig1 + mBig2/100;
+		double a = mBig1 + (mBig2/100);
 		String mag = "";
 		if(mHourIn)
 		{
@@ -156,6 +156,8 @@ public class ItemSpinnerFragment extends DialogFragment implements OnItemSelecte
 	        }
 	    });
 		
+	    v.setBackgroundResource(android.R.color.white);
+	    
 		return new AlertDialog.Builder(getActivity())
 		.setView(v)
 		.setTitle("New Item")

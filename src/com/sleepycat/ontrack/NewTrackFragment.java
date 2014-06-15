@@ -27,9 +27,12 @@ import android.widget.Toast;
 public class NewTrackFragment extends Fragment
 {
 	public static final int REQUEST_ITEM = 0;
+	public static final int REQUEST_TITLE = 1;
 	private static ArrayList<Item> mAllItems;
 	private SwipeListView mTheListView;
 	private ItemAdapter mAdapter;
+	private String mTrackTitle;
+	private boolean isHour = false;
 	
     private static final int SWIPE_MIN_DISTANCE = 120;
     private static final int SWIPE_MAX_OFF_PATH = 250;
@@ -48,17 +51,48 @@ public class NewTrackFragment extends Fragment
 		dataPasser = (OnDataPass)a;
 	}
 		
+	private double convertTime(double l)
+	{return l/60;}
+	
 	public void passData(Track result) 
 	{dataPasser.onDataPass(result);}
 		
+	private void makeTrack()
+	{
+		double totalLength = 0;
+		String mag = "Minutes";
+		if(mAllItems.size() == 1)
+			totalLength = mAllItems.get(0).getLength();
+		else
+			for(int i = 0; i < mAllItems.size()-1; i++)
+			{totalLength+=mAllItems.get(i).getLength();}
+		
+		if(!isHour && totalLength > 60)
+			totalLength = convertTime(totalLength);
+		
+		if(!isHour && totalLength == 1.0)
+			mag = "Minute";
+		else if(isHour && totalLength == 1.0)
+			mag = "Hour";
+		else if(isHour && totalLength != 1.0)
+			mag = "Hours";
+		
+		Track result = new Track(mTrackTitle, totalLength,mAllItems, mag);
+		passData(result);
+	}
+	
 	private void checkButton()
 	{
-		String title = "";
-		int totalLength = 0;
-		for(int i = 0; i < mAllItems.size()-1; i++)
-		{totalLength+=mAllItems.get(i).getLength();}
-		Track result = new Track(title, totalLength,mAllItems);
-		passData(result);
+		if(mAllItems.size() == 0)
+		{
+			Toast.makeText(getActivity(), "Please add at least one item to your track.", Toast.LENGTH_LONG).show();
+			return;
+		}
+		//call dialog to set title for track before going back to feed view
+    	FragmentManager fm = getActivity().getSupportFragmentManager();
+    	TrackTitleFragment dialog = new TrackTitleFragment();
+    	dialog.setTargetFragment(NewTrackFragment.this, REQUEST_TITLE);
+    	dialog.show(fm, "Track title");
 	}
 	
 	@Override
@@ -99,22 +133,21 @@ public class NewTrackFragment extends Fragment
 			Item item = (Item)data
 				.getSerializableExtra(ItemSpinnerFragment.EXTRA_NEW_ITEM);
 			
+			if(item.getMagnitude() == "Hour" || item.getMagnitude() == "Hours")
+				isHour = true;
+			
 			mAllItems.add(item);
 			
 			ItemAdapter iA = (ItemAdapter)mTheListView.getAdapter();
 			iA.notifyDataSetChanged();
 		}
+		if(resultCode == REQUEST_TITLE)
+		{
+			String s = (String)data.getSerializableExtra(TrackTitleFragment.EXTRA_TRACK_TITLE);
+			mTrackTitle = s;
+			makeTrack();
+		}
 	}
-	
-	/*public static void checkButton()
-	{
-		String title = "";
-		int totalLength = 0;
-		for(int i = 0; i < mAllItems.size()-1; i++)
-		{totalLength+=mAllItems.get(i).getLength();}
-		Track result = new Track(title, totalLength,mAllItems);
-		passData(result);
-	}*/
 	
 	private class ItemAdapter extends ArrayAdapter<Item>
 	{
@@ -188,14 +221,14 @@ public class NewTrackFragment extends Fragment
 	                    	FragmentManager fm = getActivity().getSupportFragmentManager();
 	                    	ItemPickerFragment dialog = new ItemPickerFragment();
 	                    	dialog.setTargetFragment(NewTrackFragment.this, REQUEST_ITEM);
-	                    	dialog.show(fm, "New track"); 
+	                    	dialog.show(fm, "New item"); 
 	                    }
 	                    else
 	                    {
 	                    	FragmentManager fm = getActivity().getSupportFragmentManager();
 	                    	ItemSpinnerFragment dialog = new ItemSpinnerFragment();
 	                    	dialog.setTargetFragment(NewTrackFragment.this, REQUEST_ITEM);
-	                    	dialog.show(fm, "New track");
+	                    	dialog.show(fm, "New item");
 	                    }
 	                    break;
 	                }
